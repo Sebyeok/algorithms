@@ -1,44 +1,51 @@
-import java.io.*;
 import java.util.*;
+import java.io.*;
 
 public class Main {
-  static int[] arr;
-  static List<Integer> answer;
-
-  static boolean found = false;
-
-  static void comb(int n, int r, int start, List<Integer> temp) {
-    if (found == true)
-      return;
-
-    if (temp.size() == r) {
-      if (temp.stream().reduce(0, (a, c) -> a + c) == 100) {
-        answer = new ArrayList(temp);
-        found = true;
-      }
-      return;
-    }
-    for (int i = start; i <= n-(r-temp.size()); i++) {
-      temp.add(arr[i]);
-      comb(n, r, i + 1, temp);
-      temp.remove(temp.size() - 1);
-    }
-  }
-
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) throws IOException{
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    arr = new int[9];
+    List<Integer> heights = new ArrayList<Integer>();
     
     for (int i = 0; i < 9; i++) {
-      arr[i] = Integer.parseInt(br.readLine());
+      heights.add(Integer.parseInt(br.readLine()));
     }
     br.close();
 
+    boolean find = false;
+    int i = 0;
+    int j = 0;
+    for (i = 0; i < 8; i++) {
+      for (j = i + 1; j < 9; j++) {
+        int sum = 0;
+        for (int k = 0; k < 9; k++) {
+          if (k != i && k != j)
+            sum += heights.get(k);
+        }
+        if (sum == 100) {
+          find = true;
+          break;
+        }
+      }
+      if (find == true) {
+        break;
+      }
+    }
 
-    comb(9, 7, 0, new ArrayList<>());
+    List<Integer> answers = new ArrayList<Integer>();
 
-    Collections.sort(answer);
-    for(int i:answer)
-      System.out.println(i);
+    for (int k = 0; k < 9; k++) {
+      if (k != i && k != j) {
+        answers.add(heights.get(k));
+      }
+    }
+    answers.sort(Comparator.naturalOrder());
+
+    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    for (int num : answers) {
+      bw.write(Integer.toString(num)+"\n");
+    }
+    bw.flush();
+    bw.close();
+
   }
 }

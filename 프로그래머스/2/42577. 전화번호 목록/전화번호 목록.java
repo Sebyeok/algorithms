@@ -6,7 +6,7 @@ class Solution {
 
         HashSet<String> hs = new HashSet();
         
-        Arrays.sort(phone_book,(a, b)->a.length()-b.length());
+        Arrays.sort(phone_book);
 
         for(String phone:phone_book){
             if(!hs.contains(phone)){

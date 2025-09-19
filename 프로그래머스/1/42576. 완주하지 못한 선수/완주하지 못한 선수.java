@@ -12,12 +12,14 @@ class Solution {
             }
         }
         for(String item:completion){
-            map.put(item, map.get(item) - 1);
+            Integer count = map.get(item);
+            if(count == 1)
+                map.remove(item);
+            else
+                map.put(item, count - 1);
         }
-        for(String key:map.keySet()){
-            if(map.get(key) == 1)
-               answer = key;
-        }
+        for(String key:map.keySet())
+            answer = key;
         
         return answer;
     }

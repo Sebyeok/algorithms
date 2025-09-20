@@ -11,17 +11,16 @@ class Solution {
         for(int score:scoville) pq.offer(score);
         
         while(pq.peek() < K){
-            if(pq.size() <= 1)
-                break;
+            if(pq.size() <= 1) break;
+            
             int item1 = pq.poll();
             int item2 = pq.poll();
             int newItem = item1 + item2 * 2;
-            answer+=1;
             pq.offer(newItem);
+            answer+=1;
         }
         
-        if(pq.peek() < K)
-            return -1;
+        if(pq.peek() < K) return -1;
         
         return answer;
     }

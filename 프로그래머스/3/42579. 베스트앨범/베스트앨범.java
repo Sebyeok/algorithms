@@ -12,7 +12,14 @@ class Solution {
                 hm.get(genres[i]).add(new Integer[]{i, plays[i]});
             } else{
                 genreSumHm.put(genres[i], plays[i]);
-                PriorityQueue<Integer[]> newPq = new PriorityQueue<>((a, b) -> b[1] - a[1]);
+                PriorityQueue<Integer[]> newPq = new PriorityQueue<>((a, b) -> {
+                        if(Integer.compare(b[1], a[1]) == 0){
+                            return Integer.compare(a[0], b[0]);
+                        } else {
+                            return Integer.compare(b[1], a[1]);
+                        }
+                        
+                    });
                 newPq.add(new Integer[]{i, plays[i]});
                 hm.put(genres[i], newPq);
             }

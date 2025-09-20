@@ -7,10 +7,10 @@ class Solution {
         stack.offerFirst(start);
         while(!stack.isEmpty()){
             int node = stack.pollFirst();
-            visited[node] = true;
             for(int i=0; i<n; i++){
                 if(!visited[i] && computers[node][i] == 1){
                     stack.offerFirst(i);
+                    visited[node] = true;
                 }
             }
         }

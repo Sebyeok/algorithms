@@ -5,6 +5,7 @@ class Solution {
     public void dfs(int start, int n, int[][] computers){
         Deque<Integer> stack = new ArrayDeque<>();
         stack.offerFirst(start);
+        visited[start] = true;
         while(!stack.isEmpty()){
             int node = stack.pollFirst();
             for(int i=0; i<n; i++){
